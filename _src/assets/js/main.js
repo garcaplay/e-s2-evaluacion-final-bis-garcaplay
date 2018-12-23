@@ -17,6 +17,13 @@ let liGenerator= '';
 
 let imgGenerator = '';
 
+let liSelector ='';
+
+let imgSelector ='';
+
+let pokeIDArray=[];
+let pokeImageArray=[];
+
 function valueSelect(){
   for(let i=0; i<radioSelector.length; i++){
     if(radioSelector[i].checked === true){
@@ -40,6 +47,7 @@ function generateLi(){
     liGenerator = document.createElement('li');
 
     liGenerator.classList.add('card-list__element');
+    liGenerator.id = `${[i]}`;
 
     imgGenerator = document.createElement('img');
 
@@ -52,6 +60,9 @@ function generateLi(){
     ulSelector.appendChild(liGenerator);
   }
 
+  liSelector = document.querySelectorAll('.card-list__element');
+  imgSelector = document.querySelectorAll('.card-list__image');
+
   apiRequest(liGenerator, imgGenerator);
 }
 
@@ -60,30 +71,41 @@ function apiRequest(liGenerator, imgGenerator){
     .then(response => response.json())
     .then(function(data){
       for(const poke of data){
-        const pairID = poke.pair;
+        const pokeID = poke.pair;
         const pokeImage = poke.image;
 
-        pokeList(pairID, pokeImage);
-
-        //function turnPoke(){
-        // img.src = `${pokeImage}`;
-
-        //li.addEventListener('click', turnPoke);
+        pokeIDArray.push(pokeID);
+        pokeImageArray.push(pokeImage);
       }
+      pokeList(pokeIDArray, pokeImageArray);
+
     });
 }
 
-function pokeList(pairID, pokeImage){
-  liGenerator.classList.add(`${pairID}`);
+function pokeList(pokeID, pokeImage){
+  for(let i=0; i<listNumber; i++){
+    liSelector[i].classList.add(`${pokeID[i]}`);
 
-  imgGenerator.classList.add(`${pairID}`);
+    imgSelector[i].classList.add(`${pokeID[i]}`);
 
+    liSelector[i].addEventListener('click', turnPoke);
+  }
+}
+
+function turnPoke(){
+  const imgClicked = this.querySelector('.card-list__image');
+  imgClicked.src = `${pokeImageArray[this.id]}`;
 }
 
 btnSelector.addEventListener('click', () =>{
   valueSelect();
   generateLi();
 });
+
+console.log(liSelector);
+
+
+
 
 
 //Click sobre el botón de 'Comenzar'--> recogemos el valor del radio y se pone en la URL del API es https://raw.githubusercontent.com/Adalab/cards-data/master/NUMERO.json,//Guardamos el número seleccionado en LocalStorage para que al recargar la página aparezca seleccionado el que se usó la última vez
