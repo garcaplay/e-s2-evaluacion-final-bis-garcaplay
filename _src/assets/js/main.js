@@ -1,44 +1,58 @@
 'use strict';
 
-//vamos a recoger el valor del radio seleccionado y a hacer que nos pinte las mismas listas que su valor
+//vamos a llamar a la API, pidiéndole que ponga el valor seleccionado
+//recogemos los datos que necesitamos (1. ID, 2. imagen)
+//pintamos las imágenes que nos dan en la lista
+
 const radioSelector = document.querySelectorAll('.form__size-option');
-let listNumber = '';
-('.form__size-option');
 
 const btnSelector = document.querySelector('.form__button');
 
 const ulSelector = document.querySelector('.body__card-list');
 
+let radioValue = '';
+
+function valueSelect(){
+  for(let i=0; i<radioSelector.length; i++){
+    if(radioSelector[i].checked === true){
+      radioValue = radioSelector[i].value;
+    }
+  }
+}
+
 function generateLi(){
 
   ulSelector.innerHTML='';
 
-  for(let i=0; i<radioSelector.length; i++){
-    if(radioSelector[i].checked === true){
-      let radioValue = radioSelector[i].value;
-      listNumber = parseInt(radioValue);
-    }
-  }
+  fetch(`https://raw.githubusercontent.com/Adalab/cards-data/master/${radioValue}.json`)
+    .then(response => response.json())
+    .then(function(data){
+      for(const poke of data){
+        const pairID = poke.pair;
+        const pokeImage = poke.image;
 
-  for (let i=0; i<listNumber; i++){
-    const liGenerator = document.createElement('li');
+        const liGenerator = document.createElement('li');
 
-    liGenerator.classList.add('card-list__element');
+        liGenerator.classList.add('card-list__element', `${pairID}`);
 
-    const imgGenerator = document.createElement('img');
+        const imgGenerator = document.createElement('img');
 
-    imgGenerator.classList.add('card-list__image');
+        imgGenerator.classList.add('card-list__image', `${pairID}`);
 
-    imgGenerator.src = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
+        imgGenerator.src = `${pokeImage}`;
 
-    liGenerator.appendChild(imgGenerator);
+        liGenerator.appendChild(imgGenerator);
 
-    ulSelector.appendChild(liGenerator);
-  }
-
+        ulSelector.appendChild(liGenerator);
+      }
+    });
 }
 
-btnSelector.addEventListener('click', generateLi);
+btnSelector.addEventListener('click', () =>{
+  valueSelect();
+  generateLi();
+});
+
 
 //Click sobre el botón de 'Comenzar'--> recogemos el valor del radio y se pone en la URL del API es https://raw.githubusercontent.com/Adalab/cards-data/master/NUMERO.json,//Guardamos el número seleccionado en LocalStorage para que al recargar la página aparezca seleccionado el que se usó la última vez
 //Hacemos la petición al API y pintamos en la lista las imágenes
