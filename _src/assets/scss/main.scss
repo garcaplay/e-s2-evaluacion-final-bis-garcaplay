@@ -1,4 +1,9 @@
-@import 'core/settings';
+@import 'core/variables';
+@import 'pages/pair-game';
+
+*{
+  box-sizing: border-box;
+}
 
 body {
 	background: $color-white;

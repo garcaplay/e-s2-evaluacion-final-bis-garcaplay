@@ -1,0 +1,54 @@
+.main__container{
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main__head{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.head__title{
+  margin-bottom: 40px;
+}
+
+.head__form{
+
+}
+
+.form__size-option{
+
+}
+
+.form__button{
+
+}
+
+.main__body{
+
+}
+
+.body__card-list{
+  width: 690px;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-auto-rows: 195px;
+  grid-gap: 10px;
+  list-style-type: none;
+}
+
+.card-list__element{
+
+}
+
+.card-list__image{
+  border: 2px solid grey;
+  border-radius: 10px;
+}
