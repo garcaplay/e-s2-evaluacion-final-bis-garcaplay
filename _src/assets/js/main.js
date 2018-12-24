@@ -55,27 +55,6 @@ function generateLi(){
     }
   }
 
-  for (let i=0; i<listNumber; i++){
-
-    liGenerator = document.createElement('li');
-
-    liGenerator.classList.add('card-list__element');
-    liGenerator.id = `${[i]}`;
-
-    imgGenerator = document.createElement('img');
-
-    imgGenerator.classList.add('card-list__image');
-    imgGenerator.id = `${[i]}`;
-
-    imgGenerator.src = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
-
-    liGenerator.appendChild(imgGenerator);
-
-    ulSelector.appendChild(liGenerator);
-  }
-
-  liSelector = document.querySelectorAll('.card-list__element');
-  imgSelector = document.querySelectorAll('.card-list__image');
 
   apiRequest(liGenerator, imgGenerator);
 }
@@ -91,18 +70,33 @@ function apiRequest(liGenerator, imgGenerator){
         pokeIDArray.push(pokeID);
         pokeImageArray.push(pokeImage);
       }
-      pokeList();
+
+      for (let i=0; i<listNumber; i++){
+
+        liGenerator = document.createElement('li');
+
+        liGenerator.classList.add('card-list__element', `${pokeIDArray[i]}`);
+        liGenerator.id = `${[i]}`;
+
+        imgGenerator = document.createElement('img');
+
+        imgGenerator.classList.add('card-list__image', `${pokeIDArray[i]}`);
+
+        imgGenerator.src = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
+
+        liGenerator.appendChild(imgGenerator);
+
+        ulSelector.appendChild(liGenerator);
+      }
+
+      liSelector = document.querySelectorAll('.card-list__element');
+      imgSelector = document.querySelectorAll('.card-list__image');
+
+      for (let i=0; i<listNumber; i++){
+        liSelector[i].addEventListener('click', turnPoke);
+      }
+
     });
-}
-
-function pokeList(){
-  for(let i=0; i<listNumber; i++){
-    liSelector[i].classList.add(`${pokeIDArray[i]}`);
-
-    imgSelector[i].classList.add(`${pokeIDArray[i]}`);
-
-    liSelector[i].addEventListener('click', turnPoke);
-  }
 }
 
 function turnPoke(){
