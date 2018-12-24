@@ -17,15 +17,27 @@
   margin-bottom: 40px;
 }
 
+.main__body{
+  margin-left: 350px;
+
+  @media all and (min-width: 768px){
+    margin-left: 0;
+  }
+}
+
 .body__card-list{
   width: 690px;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 160px 160px;
   grid-auto-rows: 195px;
   grid-gap: 10px;
   list-style-type: none;
+
+  @media all and (min-width: 768px){
+    grid-template-columns: auto auto auto auto;
+  }
 }
 
 .card-list__image{
