@@ -7,6 +7,13 @@
   padding: 0 20px;
 }
 
+.logo-image{
+  height: 60px;
+  @media all and (min-width: 768px){
+    height: 90px;
+  }
+}
+
 .header__bar-list{
   display: flex;
   justify-content: space-between;
@@ -21,10 +28,22 @@
   background-image: linear-gradient($color-white, $color-grey);
   height: 40px;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 16px;
   font-family: 'Audiowide', cursive;
+
 
   &:last-child{
     margin-right: 0;
   }
+
+  & .link{
+    text-decoration: none;
+    color: black;
+  }
+
+  @media all and (min-width: 768px){
+    height: 40px;
+    font-size: 20px;
+  }
 }
+

@@ -1,6 +1,7 @@
 .footer__bar{
-  position: absolute;
+  position: relative;
   bottom: 0;
+  margin-top: 40px;
   background-color: $color-grey;
   height: 80px;
   width: 100vw;
@@ -8,6 +9,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media all and (min-width: 768px){
+    position: absolute;
+  }
 }
 
 .logo-adalab{
