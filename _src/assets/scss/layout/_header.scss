@@ -1,0 +1,29 @@
+.header__bar{
+  height: 90px;
+  background: $color-grey;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.header__bar-list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.list-item{
+  margin-right: 10px;
+  padding: 6px 10px;
+  background-image: linear-gradient($color-white, $color-grey);
+  height: 40px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-family: 'Audiowide', cursive;
+
+  &:last-child{
+    margin-right: 0;
+  }
+}
