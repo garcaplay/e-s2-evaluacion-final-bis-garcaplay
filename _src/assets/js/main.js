@@ -1,8 +1,5 @@
 'use strict';
 
-//vamos a hacer que por defecto se vea solo la parte trasera de las cartas
-// cuando clickemos sobre una de ellas se verá la parte frontal (y viceversa -toggle-)
-
 const radioSelector = document.querySelectorAll('.form__size-option');
 
 const btnSelector = document.querySelector('.form__button');
@@ -10,6 +7,10 @@ const btnSelector = document.querySelector('.form__button');
 const ulSelector = document.querySelector('.body__card-list');
 
 let radioValue = '';
+
+let radioID = '';
+
+let preSelect = '';
 
 let listNumber = '';
 
@@ -22,7 +23,15 @@ let liSelector ='';
 let imgSelector ='';
 
 let pokeIDArray=[];
+
 let pokeImageArray=[];
+
+//Vamos a hacer que se guarde en localStorage es radio que hemos seleccionado para que aparezca por defecto al recargar la página
+
+if(localStorage.getItem('radioID') !== null){
+  preSelect = document.querySelector(`#${localStorage.getItem('radioID')}`),
+  preSelect.checked = true;
+}
 
 function valueSelect(){
   for(let i=0; i<radioSelector.length; i++){
@@ -38,12 +47,16 @@ function generateLi(){
 
   for(let i=0; i<radioSelector.length; i++){
     if(radioSelector[i].checked === true){
-      let radioValue = radioSelector[i].value;
+      radioValue = radioSelector[i].value;
       listNumber = parseInt(radioValue);
+
+      radioID = radioSelector[i].id;
+      localStorage.setItem('radioID', `${radioID}`);
     }
   }
 
   for (let i=0; i<listNumber; i++){
+
     liGenerator = document.createElement('li');
 
     liGenerator.classList.add('card-list__element');
@@ -77,16 +90,16 @@ function apiRequest(liGenerator, imgGenerator){
         pokeIDArray.push(pokeID);
         pokeImageArray.push(pokeImage);
       }
-      pokeList(pokeIDArray, pokeImageArray);
+      pokeList();
 
     });
 }
 
-function pokeList(pokeID, pokeImage){
+function pokeList(){
   for(let i=0; i<listNumber; i++){
-    liSelector[i].classList.add(`${pokeID[i]}`);
+    liSelector[i].classList.add(`${pokeIDArray[i]}`);
 
-    imgSelector[i].classList.add(`${pokeID[i]}`);
+    imgSelector[i].classList.add(`${pokeIDArray[i]}`);
 
     liSelector[i].addEventListener('click', turnPoke);
   }
@@ -99,20 +112,9 @@ function turnPoke(){
   } else {
     imgClicked.src = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
   }
-
 }
 
 btnSelector.addEventListener('click', () =>{
   valueSelect();
   generateLi();
 });
-
-console.log(liSelector);
-
-
-
-
-
-//Click sobre el botón de 'Comenzar'--> recogemos el valor del radio y se pone en la URL del API es https://raw.githubusercontent.com/Adalab/cards-data/master/NUMERO.json,//Guardamos el número seleccionado en LocalStorage para que al recargar la página aparezca seleccionado el que se usó la última vez
-//Hacemos la petición al API y pintamos en la lista las imágenes
-//Por defecto se verá solo la parte trasera de las cartas, cuando clickemos sobre una de ellas se verá la parte frontal (y viceversa -toggle-)
