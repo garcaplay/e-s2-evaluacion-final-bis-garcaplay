@@ -94,7 +94,12 @@ function pokeList(pokeID, pokeImage){
 
 function turnPoke(){
   const imgClicked = this.querySelector('.card-list__image');
-  imgClicked.src = `${pokeImageArray[this.id]}`;
+  if (imgClicked.src === 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB'){
+    imgClicked.src = `${pokeImageArray[this.id]}`;
+  } else {
+    imgClicked.src = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
+  }
+
 }
 
 btnSelector.addEventListener('click', () =>{
