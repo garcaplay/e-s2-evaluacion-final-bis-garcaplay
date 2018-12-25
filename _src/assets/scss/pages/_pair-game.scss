@@ -1,5 +1,18 @@
 .page__main{
   grid-area: main;
+  z-index: -2;
+  background-color: black;
+}
+
+.main__bg{
+  z-index: -1;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  height: 100%;
+  max-width: 100%;
+
+  opacity: 0.5;
 }
 
 .main__container{
@@ -14,11 +27,14 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  margin-bottom: 40px;
+  margin: 40px 0;
+  padding: 20px 10px;
+  background-color: rgba(255, 255, 255, 0.79);
+  border-radius: 5px;
 }
 
 .head__title{
-  margin: 40px 0;
+  margin-bottom: 40px;
 }
 
 .body__card-list{
