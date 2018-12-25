@@ -22,10 +22,11 @@ let liSelector ='';
 
 let imgSelector ='';
 
-let pokeIDArray=[];
+let pokeIDArray = [];
 
-let pokeImageArray=[];
+let pokeImageArray = [];
 
+let pairCompareArray = [];
 
 if(localStorage.getItem('radioID') !== null){
   preSelect = document.querySelector(`#${localStorage.getItem('radioID')}`),
@@ -43,6 +44,8 @@ function valueSelect(){
 function generateLi(){
 
   ulSelector.innerHTML='';
+  pokeIDArray = [];
+  pokeImageArray = [];
 
   for(let i=0; i<radioSelector.length; i++){
     if(radioSelector[i].checked === true){
@@ -53,7 +56,6 @@ function generateLi(){
       localStorage.setItem('radioID', `${radioID}`);
     }
   }
-
 
   apiRequest(liGenerator, imgGenerator);
 }
@@ -81,7 +83,7 @@ function apiRequest(liGenerator, imgGenerator){
 
         imgGenerator.classList.add('card-list__image', `${pokeIDArray[i]}`);
 
-        imgGenerator.src = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
+        imgGenerator.src = 'assets/images/ada-card.png';
 
         liGenerator.appendChild(imgGenerator);
 
@@ -94,16 +96,31 @@ function apiRequest(liGenerator, imgGenerator){
       for (let i=0; i<listNumber; i++){
         liSelector[i].addEventListener('click', turnPoke);
       }
-
+      console.log(pokeIDArray);
     });
 }
 
 function turnPoke(){
   const imgClicked = this.querySelector('.card-list__image');
-  if (imgClicked.src === 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB'){
+  if (imgClicked.src !== `${pokeImageArray[this.id]}`){
     imgClicked.src = `${pokeImageArray[this.id]}`;
+    pairCompareArray.push({pokemon:`${pokeIDArray[this.id]}`, position: `${this.id}`});
+    setTimeout(pairCompare, 1500);
   } else {
-    imgClicked.src = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
+    imgClicked.src = 'assets/images/ada-card.png';
+    pairCompareArray.pop();
+  }
+}
+
+function pairCompare(){
+  if(pairCompareArray.length >= 2){
+    if(pairCompareArray[0].pokemon !== pairCompareArray[1].pokemon){
+      imgSelector[`${pairCompareArray[0].position}`].src = 'assets/images/ada-card.png';
+      imgSelector[`${pairCompareArray[1].position}`].src = 'assets/images/ada-card.png';
+      pairCompareArray.splice(0, 2);
+    } else {
+      pairCompareArray.splice(0, 2);
+    }
   }
 }
 
@@ -111,3 +128,4 @@ btnSelector.addEventListener('click', () =>{
   valueSelect();
   generateLi();
 });
+

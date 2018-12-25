@@ -1,5 +1,8 @@
 @import 'core/variables';
+@import 'layout/header';
+@import 'layout/footer';
 @import 'pages/pair-game';
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
 
 *{
   box-sizing: border-box;
@@ -7,5 +10,15 @@
 
 body {
 	background: $color-white;
-	height: 100vh;
+  height: 100vh;
+  margin: 0;
+  position: relative;
+}
+
+.page{
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 90px 1fr 90px;
+  grid-template-areas: "header" "main" "footer";
 }
