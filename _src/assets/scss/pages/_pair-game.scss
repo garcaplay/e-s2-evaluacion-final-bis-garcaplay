@@ -1,6 +1,7 @@
 .page__main{
-  min-height: 100%;
+  grid-area: main;
 }
+
 .main__container{
   margin: 0 auto;
   display: flex;
@@ -20,17 +21,9 @@
   margin: 40px 0;
 }
 
-.main__body{
-  margin-left: 350px;
-
-  @media all and (min-width: 768px){
-    margin-left: 0;
-  }
-}
-
 .body__card-list{
-  width: 690px;
-  margin: 0;
+  width: 80%;
+  margin: 0 0 20px;
   padding: 0;
   display: grid;
   grid-template-columns: 160px 160px;

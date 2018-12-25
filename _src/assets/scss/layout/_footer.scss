@@ -1,18 +1,14 @@
+.page__footer{
+  grid-area: footer;
+}
+
 .footer__bar{
-  position: relative;
-  bottom: 0;
-  margin-top: 40px;
+  height: 90px;
   background-color: $color-grey;
-  height: 80px;
-  width: 100vw;
   padding: 0 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @media all and (min-width: 768px){
-    position: absolute;
-  }
 }
 
 .logo-adalab{

@@ -54,7 +54,6 @@ function generateLi(){
     }
   }
 
-
   apiRequest(liGenerator, imgGenerator);
 }
 
@@ -81,7 +80,7 @@ function apiRequest(liGenerator, imgGenerator){
 
         imgGenerator.classList.add('card-list__image', `${pokeIDArray[i]}`);
 
-        imgGenerator.src = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
+        imgGenerator.src = 'assets/images/ada-card.png';
 
         liGenerator.appendChild(imgGenerator);
 
@@ -100,10 +99,10 @@ function apiRequest(liGenerator, imgGenerator){
 
 function turnPoke(){
   const imgClicked = this.querySelector('.card-list__image');
-  if (imgClicked.src === 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB'){
+  if (imgClicked.src !== `${pokeImageArray[this.id]}`){
     imgClicked.src = `${pokeImageArray[this.id]}`;
   } else {
-    imgClicked.src = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
+    imgClicked.src = 'assets/images/ada-card.png';
   }
 }
 
