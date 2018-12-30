@@ -14,6 +14,8 @@ El funcionamiento de la aplicación es:
 - Clicka en la siguiente carta que crees que puede ser su pareja
 - Si era su pareja puedes seguir con el juego, si no estás se darán la vuelta de nuevo
 
+En la rama version2 se ha realizado otra versión del juego en la que la imagen de la carta bocabajo es introducida por css.
+
 Esperamos que este juego os mantenga entretenidas al menos durante estas Navidades :D
 
 ## ¿Crees que se puede mejorar?
